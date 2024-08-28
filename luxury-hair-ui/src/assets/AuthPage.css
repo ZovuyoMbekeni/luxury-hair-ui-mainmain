@@ -1,126 +1,150 @@
 /* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f3f4f6;
+/* Container for the form and social login buttons */
+/* Container for the form and social login buttons */
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    color: #333;
-
+    min-height: 100vh;
+    background-color: #f0f4f8; /* Pastel light blue background */
+    font-family: Arial, sans-serif;
 }
 
-.auth-page {
-    width: 950px;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
+/* Form container styling */
+.form-container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 40px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.auth-tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-}
-
-.auth-tabs button {
-    flex: 1;
-    padding: 0.5rem 0;
-    border: none;
-    background-color: #f3f4f6;
-    color: #333;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.auth-tabs button.active {
-    background-color: #4f46e5;
-    color: #fff;
-    border-radius: 8px;
-}
-
-.auth-content {
+    max-width: 400px;
+    width: 100%;
     text-align: center;
 }
 
-.auth-content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #4f46e5;
+/* Form heading styling */
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.auth-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.auth-content input {
-    padding: 0.8rem;
+/* Input fields styling */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.3s ease;
+    font-size: 16px;
 }
 
-.auth-content input:focus {
-    border-color: #4f46e5;
-}
-
-.auth-content button[type="submit"] {
-    padding: 0.8rem;
-    background-color: #4f46e5;
-    color: #fff;
+/* Submit button styling */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #798af6; /* Pastel mint green */
+    color: #333;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.auth-content button[type="submit"]:hover {
-    background-color: #4338ca;
+.submit-btn:hover {
+    background-color: #4c61ec; /* Slightly darker mint green */
 }
 
+/* Toggle button styling */
+.toggle-btn {
+    width: 100%;
+    padding: 12px;
+    background-color:#f67280 ; /* Pastel pink */
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+    background-color: #ff003d; /* Slightly darker pastel pink */
+}
+
+/* Social login section styling */
 .social-login {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 20px;
 }
 
-.social-login button {
-    padding: 0.8rem;
+/* Social buttons styling */
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
     border: none;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.google-login {
-    background-color: #db4437;
-    color: #fff;
+/* Google button styling */
+.google-btn {
+    background-color: #f35b6a; /* Pastel pink for Google button */
+    color: #333;
 }
 
-.google-login:hover {
-    background-color: #c33827;
+.google-btn:hover {
+    background-color: #ffb3c6; /* Slightly darker pastel pink */
 }
 
-.facebook-login {
-    background-color: #4267b2;
-    color: #fff;
+/* Facebook button styling */
+.facebook-btn {
+    background-color: #4267b2; /* Standard Facebook blue */
+    color: white;
 }
 
-.facebook-login:hover {
-    background-color: #365899;
+.facebook-btn:hover {
+    background-color: #6e89ba; /* Slightly darker Facebook blue */
+}
+
+/* Popup styling for error messages */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-inner {
+    background-color: #ffffff; /* White background for the popup */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 80%;
+}
+
+/* Close button styling */
+.close-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f67280; /* Pastel pink */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.close-btn:hover {
+    background-color: #f35b6a; /* Slightly darker pastel pink */
 }
