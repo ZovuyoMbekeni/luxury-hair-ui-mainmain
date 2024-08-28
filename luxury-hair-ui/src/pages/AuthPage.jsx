@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import '../assets/AuthPage.css';
+import axios from 'axios';
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -21,7 +22,7 @@ const AuthPage = () => {
             const email = formData.get('email');
             const password = formData.get('password');
 
-            // Example of simple client-side validation
+            // Simple client-side validation
             if (!email || !password) {
                 throw new Error('Email and password are required.');
             }
@@ -31,31 +32,42 @@ const AuthPage = () => {
                 if (!fullName) {
                     throw new Error('Full name is required for sign up.');
                 }
+
+
+                await axios.post('http://localhost:8080/LuxuryHairVendingSystemDB/userlogin/create', {
+                    fullName,
+                    email,
+                    password
+                });
+
+                alert('Signup successful!');
+            } else {
+                // API call for login
+                await axios.post('http://localhost:8080/LuxuryHairVendingSystemDB/userlogin/read', {
+                    email,
+                    password
+                });
+
+                alert('Login successful!');
             }
-
-            // Mock API request simulation (replace with actual API call)
-            await fakeApiRequest(email, password);
-
-            alert(isLogin ? 'Login successful!' : 'Signup successful!');
         } catch (error) {
-            setErrorMessage(error.message || 'An unexpected error occurred. Please try again.');
+            setErrorMessage(error.response?.data?.message || error.message || 'An unexpected error occurred. Please try again.');
             setShowPopup(true); // Show the popup with the error message
         }
-    };
-
-    // Mock function to simulate an API request (for demonstration purposes)
-    const fakeApiRequest = (email, password) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                // Simulate a success response
-                resolve({ success: true });
-            }, 1000);
-        });
     };
 
     const handleGoogleLoginSuccess = (response) => {
         console.log('Google login success:', response);
         // Handle Google OAuth success logic here (e.g., send token to backend)
+        // Example API call to your backend
+        axios.post('http://localhost:8080/LuxuryHairVendingSystemDB/userlogin/google-login', { token: response.credential })
+            .then(res => {
+                alert('Google login successful!');
+            })
+            .catch(err => {
+                setErrorMessage('Google login failed. Please try again.');
+                setShowPopup(true);
+            });
     };
 
     const handleGoogleLoginError = (error) => {
@@ -63,7 +75,6 @@ const AuthPage = () => {
         setErrorMessage('Google login failed. Please try again.');
         setShowPopup(true); // Show the popup with the error message
     };
-
 
     const closePopup = () => {
         setShowPopup(false);
@@ -102,7 +113,6 @@ const AuthPage = () => {
                             onSuccess={handleGoogleLoginSuccess}
                             onError={handleGoogleLoginError}
                         />
-
                     </div>
                 </div>
             </div>
